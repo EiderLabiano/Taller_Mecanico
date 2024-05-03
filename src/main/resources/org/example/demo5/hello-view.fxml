@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo5.SQL">
     <children>
         <Label layoutX="189.0" layoutY="10.0" prefHeight="34.0" prefWidth="117.0" text="Intelli" textFill="#31e1cc">
             <font>
@@ -40,8 +40,7 @@
         </HBox>
         <HBox alignment="CENTER" layoutX="12.0" layoutY="291.0" prefHeight="59.0" prefWidth="302.0" spacing="145.0">
             <children>
-                <Button fx:id="butSesion" mnemonicParsing="false" prefWidth="95.0" style="-fx-background-color: #49c92c;" text="Iniciar sesión" />
-                <Button fx:id="butCancelar" contentDisplay="RIGHT" mnemonicParsing="false" style="-fx-background-color: #d43017;" text="Cancelar" />
+                <Button fx:id="butSesion" mnemonicParsing="false" onAction="#mostrarAlertError" prefWidth="95.0" style="-fx-background-color: #49c92c;" text="Iniciar sesión" />
             </children>
         </HBox>
         <HBox layoutX="6.0" layoutY="263.0" prefHeight="34.0" prefWidth="300.0">
