@@ -7,16 +7,16 @@
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
         <children>
-            <Label layoutX="239.0" layoutY="40.0" prefHeight="38.0" prefWidth="152.0" text="Inventario Piezas" textAlignment="CENTER" textFill="#2600ff">
+            <Label layoutX="203.0" layoutY="40.0" prefHeight="38.0" prefWidth="213.0" text="Inventario Componentes" textAlignment="CENTER" textFill="#2600ff">
                 <font>
                     <Font name="Sitka Small" size="17.0" />
                 </font></Label>
-            <TableView fx:id="tabletxt" layoutX="95.0" layoutY="96.0" prefHeight="234.0" prefWidth="428.0">
+            <TableView fx:id="tabletxt" layoutX="86.0" layoutY="78.0" prefHeight="234.0" prefWidth="428.0">
                 <columns>
-                    <TableColumn prefWidth="131.0" sortType="DESCENDING" text="Nombre" />
-                    <TableColumn prefWidth="91.0" text="Tipo" />
-                    <TableColumn prefWidth="74.0" text="Stock" />
-                    <TableColumn prefWidth="136.0" text="Precio" />
+                    <TableColumn fx:id="nombreText" prefWidth="131.0" sortType="DESCENDING" text="Nombre" />
+                    <TableColumn fx:id="tipotext" prefWidth="91.0" text="Tipo" />
+                    <TableColumn fx:id="stocktext" prefWidth="74.0" text="Stock" />
+                    <TableColumn fx:id="preciotext" prefWidth="136.0" text="Precio" />
                 </columns>
             </TableView>
         </children>
