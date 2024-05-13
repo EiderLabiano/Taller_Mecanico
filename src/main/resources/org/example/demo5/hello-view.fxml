@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-
 <StackPane fx:id="root" prefHeight="400" prefWidth="600" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo5.HelloController">
     <VBox alignment="CENTER">
         <children>
             <HBox alignment="CENTER" prefWidth="600.0">
-                <Label prefHeight="34.0" prefWidth="117.0" text="Intelli" textFill="#31e1cc">
+                <Label prefHeight="34.0" prefWidth="117.0" text="Intelli" textFill="#2f00ff">
                     <font>
                         <Font name="JetBrains Mono Regular" size="20.0" />
                     </font>
