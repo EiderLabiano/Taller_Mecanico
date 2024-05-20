@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.Timer;
 
 public class HelloApplication   extends Application {
 
@@ -34,6 +35,15 @@ public class HelloApplication   extends Application {
 
     public void pantalla2() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Vacio.class.getResource("vacio.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 800, 600);
+        stage.setTitle("Hello!");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
+    public void TABLA() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Pedidos.class.getResource("TABLE.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 600);
         stage.setTitle("Hello!");
         stage.setScene(scene);
