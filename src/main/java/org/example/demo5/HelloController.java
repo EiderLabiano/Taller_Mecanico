@@ -44,14 +44,16 @@ public class HelloController {
         return null;
     }
 
-    public void comprobarContra(ActionEvent event) throws IOException {
+    public void comprobarContra(ActionEvent event) throws IOException, SQLException {
         if (usuarioText.getText().isEmpty() || usuarioText.getText().length() > 20) {
             error1();
         } else if (contrapas.getText().isEmpty() || contrapas.getText().length() > 10) {
             error();
-        } else {
+        } else if (!userExists(usuarioText.getText(), contrapas.getText())) {
             cerrarVentana(event);
             cambioPagina.pantalla2();
+        } else {
+            Informacion();
         }
     }
     public static void cerrarVentana(ActionEvent e) {
@@ -84,32 +86,15 @@ public class HelloController {
         alert.show();
     }
 
-    public boolean insertar() {
-        Connection miConexion = null;
-        try {
-            miConexion = conectarSql();
-            PreparedStatement statment = miConexion.prepareStatement("insert into usuario (nombre, contrasenya) values (?,?)");
-            statment.setString(1, usuarioText.getText());
-            try {
-                statment.setInt(2, Integer.parseInt(contrapas.getText()));
-            } catch (NumberFormatException e) {
-                System.out.println("Formato erroneo");
-                return false;
-            }
-            statment.executeUpdate();
-            return true;
-        } catch (SQLException e) {
-            System.out.println("No funciona la conexion");
-            return false;
-        } finally {
-            if (miConexion != null) {
-                try {
-                    miConexion.close();
-                } catch (SQLException e) {
-                    System.out.println("Error al cerrar");
-                }
-            }
-        }
+    public boolean userExists(String username, String password) throws SQLException {
+        Connection conexion = conectarSql();
+        PreparedStatement statment = conexion.prepareStatement("SELECT COUNT(*) FROM usuario WHERE nombre = ? AND contrasenya = ?");
+        statment.setString(1, username);
+        statment.setString(2, password);
+        ResultSet resultSet = statment.executeQuery();
+        resultSet.next();
+        int count = resultSet.getInt(1);
+        return count > 0;
     }
 
 }
