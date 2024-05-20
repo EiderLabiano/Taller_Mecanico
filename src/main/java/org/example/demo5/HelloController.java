@@ -45,7 +45,9 @@ public class HelloController {
     }
 
     public void comprobarContra(ActionEvent event) throws IOException {
-        if (usuarioText.getText().isEmpty()) {
+        if (usuarioText.getText().isEmpty() || usuarioText.getText().length() > 20) {
+            error1();
+        } else if (contrapas.getText().isEmpty() || contrapas.getText().length() > 10) {
             error();
         } else {
             cerrarVentana(event);
@@ -57,11 +59,20 @@ public class HelloController {
         Stage stage = (Stage)source.getScene().getWindow();
         stage.close();
     }
+    public void error1() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText("Error");
+        alert.setContentText("Formato de usuario incorrecto.");
+        alert.setTitle("IMPOSIBLE AÑADIR TRABAJADOR");
+        alert.show();
+    }
+
+
     public void error() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText("Error");
-        alert.setContentText("Si no rellena los campos no se puede añadir a la lista de los usuarios");
-        alert.setTitle("IMPOSIBLE AÑADIR USUARIO");
+        alert.setContentText("Formato de  contraseña incorrecta.");
+        alert.setTitle("IMPOSIBLE AÑADIR TRABAJADOR");
         alert.show();
     }
 
@@ -71,6 +82,34 @@ public class HelloController {
         alert.setContentText("Empleado " + usuarioText.getText() + " introducido en la base de datos");
         alert.setTitle("HECHO");
         alert.show();
+    }
+
+    public boolean insertar() {
+        Connection miConexion = null;
+        try {
+            miConexion = conectarSql();
+            PreparedStatement statment = miConexion.prepareStatement("insert into usuario (nombre, contrasenya) values (?,?)");
+            statment.setString(1, usuarioText.getText());
+            try {
+                statment.setInt(2, Integer.parseInt(contrapas.getText()));
+            } catch (NumberFormatException e) {
+                System.out.println("Formato erroneo");
+                return false;
+            }
+            statment.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("No funciona la conexion");
+            return false;
+        } finally {
+            if (miConexion != null) {
+                try {
+                    miConexion.close();
+                } catch (SQLException e) {
+                    System.out.println("Error al cerrar");
+                }
+            }
+        }
     }
 
 }
