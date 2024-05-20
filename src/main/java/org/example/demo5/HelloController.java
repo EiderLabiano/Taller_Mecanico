@@ -1,13 +1,15 @@
 package org.example.demo5;
 
-import javafx.fxml.FXML;
+import javafx.event.ActionEvent;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.Timer;
 
 public class HelloController {
 
@@ -21,7 +23,7 @@ public class HelloController {
         cambioPagina = new HelloApplication();
     }
     public Connection conectarSql() throws SQLException {
-        String direccion = "jdbc:mysql://localhost:3306/programacion";
+        String direccion = "jdbc:mysql://localhost:3306/usuarios";
         String usuario = "root";
         String contrasenya = "root";
         Connection conexion = null;
@@ -42,6 +44,33 @@ public class HelloController {
         return null;
     }
 
+    public void comprobarContra(ActionEvent event) throws IOException {
+        if (usuarioText.getText().isEmpty()) {
+            error();
+        } else {
+            cerrarVentana(event);
+            cambioPagina.pantalla2();
+        }
+    }
+    public static void cerrarVentana(ActionEvent e) {
+        Node source = (Node)e.getSource();
+        Stage stage = (Stage)source.getScene().getWindow();
+        stage.close();
+    }
+    public void error() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText("Error");
+        alert.setContentText("Si no rellena los campos no se puede añadir a la lista de los usuarios");
+        alert.setTitle("IMPOSIBLE AÑADIR USUARIO");
+        alert.show();
+    }
 
+    public void Informacion() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Mensaje");
+        alert.setContentText("Empleado " + usuarioText.getText() + " introducido en la base de datos");
+        alert.setTitle("HECHO");
+        alert.show();
+    }
 
 }
