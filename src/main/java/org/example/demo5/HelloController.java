@@ -1,45 +1,46 @@
 package org.example.demo5;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.*;
+import java.util.ResourceBundle;
 import java.util.Timer;
 
-public class HelloController {
+public class HelloController implements Initializable{
 
     public HelloApplication cambioPagina;
     public TextField usuarioText;
     public TextField contrapas;
     public Button butSesion;
-
+    public Button refreshButton;
+    public ListView<String> componentes;
+    public ComboBox<String> choice;
     public HelloController()
     {
         cambioPagina = new HelloApplication();
     }
-    public Connection conectarSql() throws SQLException {
-        String direccion = "jdbc:mysql://localhost:3306/usuarios";
+    public Connection conectarSql() {
+        String direccion = "jdbc:mysql://localhost:3306/TallerMecanico";
         String usuario = "root";
         String contrasenya = "root";
         Connection conexion = null;
 
         try {
             conexion = DriverManager.getConnection(direccion, usuario, contrasenya);
-            String contra= contrapas.getText();
-            String nomb = usuarioText.getText();
-            cambioPagina.pantalla2();
             if (conexion != null) {
                 return conexion;
             }
         } catch (SQLException e) {
             System.out.println("Error al acceder");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
         return null;
     }
@@ -51,7 +52,7 @@ public class HelloController {
             error();
         } else if (!userExists(usuarioText.getText(), contrapas.getText())) {
             cerrarVentana(event);
-            cambioPagina.pantalla2();
+            cambioPagina.TABLA();
         } else {
             Informacion();
         }
@@ -97,4 +98,22 @@ public class HelloController {
         return count > 0;
     }
 
+    public void refresh() {
+        try {
+            Connection connection = conectarSql();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("select * from Componentes");
+            componentes.getItems().clear();
+            while (resultSet.next()) {
+                componentes.getItems().add(resultSet.getString("nombre"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al refrescar");
+        }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+       
+    }
 }
