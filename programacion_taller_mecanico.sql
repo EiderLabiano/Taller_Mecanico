@@ -53,6 +53,26 @@ CREATE TABLE Averias (
   Descripcion TEXT,
   Precio DECIMAL(10, 2)
 );
+CREATE TABLE componentes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255),
+    precio DECIMAL(10, 2),
+    stock INT
+);
+CREATE TABLE pedidos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    averia_id INT,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (averia_id) REFERENCES averias(id)
+);
+CREATE TABLE detalle_pedido (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pedido_id INT,
+    componente_id INT,
+    cantidad INT,
+    FOREIGN KEY (pedido_id) REFERENCES pedidos(id),
+    FOREIGN KEY (componente_id) REFERENCES componentes(id)
+);
 
 INSERT INTO Componentes (ID_Componente, nombre, modelo, stock, numero)
 VALUES (1, 'Batería', 'ACDelco 48AGM', 10, 150);
@@ -173,6 +193,8 @@ VALUES (9, 'Luis Rodríguez', 'Cambio de filtro de aire', 30.00);
 INSERT INTO Averias (IdPedido, NombreUsuario, Descripcion, Precio)
 VALUES (10, 'Ana Martínez', 'Revisión general del vehículo', 100.00);
 
+INSERT INTO pedidos (averia_id) VALUES (1);
+INSERT INTO detalle_pedido (pedido_id, componente_id, cantidad) VALUES (1, 1, 5);
 
 
 
