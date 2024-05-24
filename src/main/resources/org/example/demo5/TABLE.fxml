@@ -4,21 +4,23 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo5.Tabla">
     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
         <children>
-            <Label layoutX="203.0" layoutY="40.0" prefHeight="38.0" prefWidth="213.0" text="Inventario Componentes" textAlignment="CENTER" textFill="#2600ff">
+            <Label layoutX="373.0" layoutY="14.0" prefHeight="38.0" prefWidth="213.0" text="Inventario Componentes" textAlignment="CENTER" textFill="#2600ff">
                 <font>
                     <Font name="Sitka Small" size="17.0" />
                 </font></Label>
-            <TableView fx:id="tabletxt" layoutX="86.0" layoutY="78.0" prefHeight="234.0" prefWidth="428.0">
-                <columns>
-                    <TableColumn fx:id="nombreText" prefWidth="131.0" sortType="DESCENDING" text="Nombre" />
-                    <TableColumn fx:id="tipotext" prefWidth="91.0" text="Tipo" />
-                    <TableColumn fx:id="stocktext" prefWidth="74.0" text="Stock" />
-                    <TableColumn fx:id="preciotext" prefWidth="136.0" text="Precio" />
-                </columns>
-            </TableView>
+         <Button fx:id="refreshButton" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#refrescarDatos" text="Refrescar" />
+         <TableView fx:id="tableView" layoutX="14.0" layoutY="73.0" prefHeight="276.0" prefWidth="375.0">
+           <columns>
+             <TableColumn fx:id="IDColumn" prefWidth="75.0" text="ID_Componente" />
+             <TableColumn fx:id="NombreClumn" prefWidth="75.0" text="Nombre" />
+               <TableColumn fx:id="ModeloColumn" prefWidth="75.0" text="Modelo" />
+               <TableColumn fx:id="StockColumn" prefWidth="75.0" text="Stock" />
+               <TableColumn fx:id="CantidadColumn" prefWidth="75.0" text="Cantidad" />
+           </columns>
+         </TableView>
         </children>
     </AnchorPane>
 </StackPane>
