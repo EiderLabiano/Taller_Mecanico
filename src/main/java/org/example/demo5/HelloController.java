@@ -3,6 +3,7 @@ package org.example.demo5;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -15,18 +16,23 @@ import java.sql.*;
 import java.util.ResourceBundle;
 import java.util.Timer;
 
-public class HelloController implements Initializable{
+public class HelloController {
 
     public HelloApplication cambioPagina;
     public TextField usuarioText;
     public TextField contrapas;
     public Button butSesion;
     public Button refreshButton;
-    public ListView<String> componentes;
+    public ListView<String> componentes = new ListView<>();
     public ComboBox<String> choice;
+    private ObservableList<String> piezas = FXCollections.observableArrayList();
+
     public HelloController()
     {
         cambioPagina = new HelloApplication();
+    }
+    public void cambio() throws IOException {
+        cambioPagina.TABLA();
     }
     public Connection conectarSql() {
         String direccion = "jdbc:mysql://localhost:3306/TallerMecanico";
@@ -45,18 +51,6 @@ public class HelloController implements Initializable{
         return null;
     }
 
-    public void comprobarContra(ActionEvent event) throws IOException, SQLException {
-        if (usuarioText.getText().isEmpty() || usuarioText.getText().length() > 20) {
-            error1();
-        } else if (contrapas.getText().isEmpty() || contrapas.getText().length() > 10) {
-            error();
-        } else if (!userExists(usuarioText.getText(), contrapas.getText())) {
-            cerrarVentana(event);
-            cambioPagina.TABLA();
-        } else {
-            Informacion();
-        }
-    }
     public static void cerrarVentana(ActionEvent e) {
         Node source = (Node)e.getSource();
         Stage stage = (Stage)source.getScene().getWindow();
@@ -112,8 +106,50 @@ public class HelloController implements Initializable{
         }
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-       
+    public void initialize() {
+        componentes.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                String compo = componentes.getSelectionModel().getSelectedItem();
+                refrescar();
+            }
+        });
     }
+    public void refrescar()
+    {
+        try
+        {
+            Connection connection = conectarSql();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT NOMBRE FROM Componentes");
+            componentes.getItems().clear();
+            while (resultSet.next())
+            {
+                componentes.getItems().add(resultSet.getString("NOMBRE"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al refrescar");
+        }
+    }
+    /*public void datos(String nombre)
+    {
+        {
+            try {
+                Connection connection = conectarSql();
+                PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Componentes where NOMBRE = ?");
+                preparedStatement.setString(1, nombre);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while (resultSet.next())
+                {
+                    IDLabel.setText(resultSet.getString("ID"));
+                    NombreLabel.setText(resultSet.getString("NOMBRE"));
+                    PuestoLabel.setText(resultSet.getString("PUESTO"));
+                    SalarioLabel.setText(resultSet.getString("SALARIO"));
+                    FechaLabel.setText(resultSet.getString("FECHA"));
+                }
+            } catch (SQLException e) {
+                System.out.println("Error al Seleccionar");
+            }
+        }
+    }*/
 }
