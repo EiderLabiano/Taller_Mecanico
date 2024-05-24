@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo5.InsertarPedidos">
+   <children>
+      <ImageView fitHeight="450.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@carbono.png" />
+         </image>
+      </ImageView>
+      <TableView layoutX="14.0" layoutY="14.0" prefHeight="241.0" prefWidth="405.0">
+        <columns>
+          <TableColumn fx:id="IDProducto" prefWidth="104.0" text="ID_Componente" />
+          <TableColumn fx:id="NombreProducto" prefWidth="56.0" text="nombre" />
+            <TableColumn fx:id="IDModelo" text="modelo" />
+            <TableColumn fx:id="IDStock" text="stock" />
+            <TableColumn fx:id="IDPrecio" prefWidth="83.0" text="precio" />
+        </columns>
+         <effect>
+            <Lighting diffuseConstant="2.0">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+      </TableView>
+      <Button fx:id="BotonRealizarPedido" layoutX="443.0" layoutY="376.0" mnemonicParsing="false" text="Realizar pedido"  />
+      <TableView layoutX="69.0" layoutY="348.0" prefHeight="81.0" prefWidth="295.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="Productos" />
+          <TableColumn prefWidth="75.0" text="Cantidad" />
+            <TableColumn prefWidth="144.0" text="Precio/Unidad" />
+        </columns>
+      </TableView>
+      <Button layoutX="27.0" layoutY="266.0" mnemonicParsing="false" text="Agregar a la compra">
+         <effect>
+            <Lighting diffuseConstant="1.43">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant>
+                     <color>
+                        <Color red="0.8421052694320679" green="0.015594542026519775" blue="0.015594542026519775" />
+                     </color>
+                  </Light.Distant>
+               </light>
+            </Lighting>
+         </effect></Button>
+      <Label layoutX="141.0" layoutY="299.0" text="Tus productos" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="IDAñadirProd" layoutX="38.0" layoutY="376.0" mnemonicParsing="false" text="+" />
+      <Button fx:id="IDQuitarProd" layoutX="38.0" layoutY="400.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="-" />
+      <ImageView fx:id="IDUsuario" fitHeight="81.0" fitWidth="77.0" layoutX="510.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@usuario.png" />
+         </image>
+         <effect>
+            <Lighting bumpInput="$null">
+               <light>
+                  <Light.Distant>
+                     <color>
+                        <Color red="0.6980392336845398" green="0.0235294122248888" blue="0.0235294122248888" />
+                     </color>
+                  </Light.Distant>
+               </light>
+            </Lighting>
+         </effect>
+      </ImageView>
+      <ImageView fitHeight="104.0" fitWidth="173.0" layoutX="406.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../ProyectoProg/Taller_Mecanico-master/src/main/resources/org/example/demo5/24YF-en-removebg-preview.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
