@@ -1,17 +1,34 @@
 package org.example.demo5;
 
 public class Componentes {
-    public String ID_Componente;
-    public  String nombre;
-    public double precio;
-    public int stock;
-    public String modelo;
+    private int ID_Componente;
+    private String nombre;
+    private int stock;
+    private String modelo;
+    private int precio;
 
-    public String getID_Componente() {
+    public Componentes(int id, String nombre, String modelo, int stock, int precio) {
+        this.ID_Componente = id;
+        this.nombre = nombre;
+        this.stock = stock;
+        this.modelo = modelo;
+        this.precio = precio;
+    }
+
+
+    public int getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(int precio) {
+        this.precio = precio;
+    }
+
+    public int getID_Componente() {
         return ID_Componente;
     }
 
-    public void setID_Componente(String ID_Componente) {
+    public void setID_Componente(int ID_Componente) {
         this.ID_Componente = ID_Componente;
     }
 
@@ -22,14 +39,7 @@ public class Componentes {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-    public double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
+    
 
     public int getStock() {
         return stock;
