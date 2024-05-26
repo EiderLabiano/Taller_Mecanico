@@ -18,9 +18,10 @@
              <TableColumn fx:id="NombreClumn" prefWidth="75.0" text="Nombre" />
                <TableColumn fx:id="ModeloColumn" prefWidth="75.0" text="Modelo" />
                <TableColumn fx:id="StockColumn" prefWidth="75.0" text="Stock" />
-               <TableColumn fx:id="CantidadColumn" prefWidth="75.0" text="Cantidad" />
+               <TableColumn fx:id="PrecioColumn" prefWidth="75.0" text="Precio" />
            </columns>
          </TableView>
+         <Button fx:id="idComponente" layoutX="457.0" layoutY="361.0" mnemonicParsing="false" onAction="#insertarComponente" text="Insertar Componente" />
         </children>
     </AnchorPane>
 </StackPane>
