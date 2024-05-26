@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.Timer;
 
@@ -31,30 +32,34 @@ public class HelloController {
     {
         cambioPagina = new HelloApplication();
     }
-    public void cambio(ActionEvent event) throws IOException {
+    public void cambio(ActionEvent event) throws IOException, SQLException {
         cerrarVentana(event);
-        cambioPagina.TABLA();
+        if (Objects.equals(conectarSql(), "Mecanico")) {
+            cambioPagina.TABLA();
+        }
     }
-    public boolean conectarSql(ActionEvent event) throws SQLException, IOException {
+    public String conectarSql() throws SQLException {
         Conexion connection = new Conexion();
 
-        connection.statement.execute("use TallerMecanico");
+        connection.getStatement().execute("use TallerMecanico");
         String nombre = usuarioText.getText();
         String contrasenya = contrapas.getText();
 
-        ResultSet resultSet = connection.statement.executeQuery("select Nombre, Contraseña from usuarios where Nombre = '" + nombre + "' AND Contraseña = '" + contrasenya + "'");
+        ResultSet resultSet = connection.getStatement().executeQuery("select Nombre, Contraseña, rol from usuarios where Nombre = '" + nombre + "' AND Contraseña = '" + contrasenya + "'");
         if (resultSet.next()) {
+            String rol = resultSet.getString("rol");
+
             String nombreEnBaseDeDatos = resultSet.getString("Nombre");
             if (nombreEnBaseDeDatos.equals(nombre))
             {
-                cambio(event);
-                return true;
+                System.out.println(rol);
+                return rol;
             }
         } else {
             error1();
-            return false;
+            return null;
         }
-        return false;
+        return null;
     }
 
     public static void cerrarVentana(ActionEvent e) {
