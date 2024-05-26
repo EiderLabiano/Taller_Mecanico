@@ -33,17 +33,16 @@ public class HelloApplication   extends Application {
         stage.show();
     }
 
-    public void pantalla2() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Vacio.class.getResource("vacio.fxml"));
+    public void TABLA() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Pedidos.class.getResource("TABLE.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 600);
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
     }
 
-
-    public void TABLA() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Pedidos.class.getResource("TABLE.fxml"));
+    public void insertar() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(InsertarComponentes.class.getResource("Insertar_Componentes.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 600);
         stage.setTitle("Hello!");
         stage.setScene(scene);
