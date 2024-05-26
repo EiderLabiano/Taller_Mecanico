@@ -20,7 +20,7 @@ public class Tabla implements Initializable {
     public TableColumn<Componentes, String> NombreClumn;
     public TableColumn<Componentes, String> ModeloColumn;
     public TableColumn<Componentes, Integer> StockColumn;
-    public TableColumn<Componentes, Integer> CantidadColumn;
+    public TableColumn<Componentes, Integer> PrecioColumn;
     ObservableList<Componentes> ListPiezas = FXCollections.observableArrayList();
 
     public Connection conectarSql() {
@@ -40,22 +40,13 @@ public class Tabla implements Initializable {
         return null;
     }
 
-
-    /*public void initialize() {
-        tableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Object>() {
-            @Override
-            public void changed(ObservableValue<?> observableValue, Object o, Object t1) {
-                Object compo = tableView.getSelectionModel().getSelectedItem();
-            }
-        });
-    }*/
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tableView.setItems(ListPiezas);
         IDColumn.setCellValueFactory(new PropertyValueFactory<Componentes,Integer>("ID_Componente"));
         NombreClumn.setCellValueFactory(new PropertyValueFactory<Componentes,String>("Nombre"));
         ModeloColumn.setCellValueFactory(new PropertyValueFactory<Componentes,String>("modelo"));
         StockColumn.setCellValueFactory(new PropertyValueFactory<Componentes, Integer>("Stock"));
-        CantidadColumn.setCellValueFactory(new PropertyValueFactory<Componentes, Integer>("numero"));
+        PrecioColumn.setCellValueFactory(new PropertyValueFactory<Componentes, Integer>("precio"));
         tableView.setItems(ListPiezas);
     }
 
@@ -79,11 +70,11 @@ public class Tabla implements Initializable {
                     String Nombre = resultSet.getString("Nombre");
                     String Modelo = resultSet.getString("Modelo");
                     int stock = resultSet.getInt("stock");
-                    int cantidad = resultSet.getInt("numero");
+                    int precio = resultSet.getInt("precio");
 
 
-                    Componentes nuevoAlimento = new Componentes(ID, Nombre, Modelo, stock, cantidad);
-                    ListPiezas.add(nuevoAlimento);
+                    Componentes nuevoComponente = new Componentes(ID, Nombre, Modelo, stock, precio);
+                    ListPiezas.add(nuevoComponente);
                 }
                 return ListPiezas;
             }
