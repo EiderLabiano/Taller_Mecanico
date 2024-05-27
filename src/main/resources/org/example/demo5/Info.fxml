@@ -74,12 +74,12 @@
          <children>
             <Pane fx:id="PanelIntro" prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ImageView fitHeight="161.0" fitWidth="161.0" layoutX="-17.0" layoutY="-21.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="161.0" fitWidth="161.0" layoutX="34.0" layoutY="-21.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../../../ProyectoProg/Taller_Mecanico-master/src/main/resources/org/example/demo5/gold__1_-removebg-preview.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="-8.0" layoutY="106.0" text="Quienes somos" textFill="WHITE">
+                  <Label layoutX="45.0" layoutY="105.0" text="Quienes somos" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -88,26 +88,12 @@
             </Pane>
             <Pane fx:id="PanelPiezas" prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ImageView fitHeight="161.0" fitWidth="158.0" layoutX="-22.0" layoutY="-21.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="161.0" fitWidth="158.0" layoutX="12.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../../../ProyectoProg/Taller_Mecanico-master/src/main/resources/org/example/demo5/gold__2_-removebg-preview.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="28.0" layoutY="105.0" text="Piezas" textFill="#fffdfd">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Pane fx:id="PanelDudas" prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <ImageView fitHeight="161.0" fitWidth="147.0" layoutX="-16.0" layoutY="-16.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../../ProyectoProg/Taller_Mecanico-master/src/main/resources/org/example/demo5/gold__3_-removebg-preview.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="27.0" layoutY="105.0" text="Dudas" textFill="WHITE">
+                  <Label layoutX="62.0" layoutY="106.0" text="Piezas" textFill="#fffdfd">
                      <font>
                         <Font size="18.0" />
                      </font>
