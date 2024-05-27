@@ -8,76 +8,76 @@
 <?import javafx.scene.text.*?>
 
 <StackPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo5.PedidoController">
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <ImageView fitHeight="450.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@carbono.png" />
-         </image>
-      </ImageView>
-      <TableView fx:id="tableView" layoutX="14.0" layoutY="14.0" prefHeight="241.0" prefWidth="372.0">
-        <columns>
-           <TableColumn fx:id="IDColumn" prefWidth="106.0" text="ID_Componente" />
-           <TableColumn fx:id="NombreClumn" prefWidth="68.0" text="Nombre" />
-           <TableColumn fx:id="ModeloColumn" prefWidth="51.0" text="Modelo" />
-           <TableColumn fx:id="StockColumn" prefWidth="75.0" text="Stock" />
-           <TableColumn fx:id="PrecioColumn" prefWidth="75.0" text="Precio" />
-        </columns>
-         <effect>
-            <Lighting diffuseConstant="2.0">
-               <bumpInput>
-                  <Shadow />
-               </bumpInput>
-               <light>
+   <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+      <children>
+         <ImageView fitHeight="450.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@carbono.png" />
+            </image>
+         </ImageView>
+         <TableView fx:id="tableView" layoutX="14.0" layoutY="14.0" prefHeight="241.0" prefWidth="372.0">
+            <columns>
+               <TableColumn fx:id="IDColumn" prefWidth="106.0" text="ID_Componente" />
+               <TableColumn fx:id="NombreClumn" prefWidth="68.0" text="Nombre" />
+               <TableColumn fx:id="ModeloColumn" prefWidth="51.0" text="Modelo" />
+               <TableColumn fx:id="StockColumn" prefWidth="75.0" text="Stock" />
+               <TableColumn fx:id="PrecioColumn" prefWidth="75.0" text="Precio" />
+            </columns>
+            <effect>
+               <Lighting diffuseConstant="2.0">
+                  <bumpInput>
+                     <Shadow />
+                  </bumpInput>
+                  <light>
 
-               </light>
-            </Lighting>
-         </effect>
-      </TableView>
-      <Button fx:id="BotonRealizarPedido" layoutX="443.0" layoutY="376.0" mnemonicParsing="false" onAction="#realizarPedidio" text="Realizar pedido" />
-      <TableView fx:id="TableProducto" layoutX="69.0" layoutY="348.0" prefHeight="81.0" prefWidth="241.0">
-        <columns>
-          <TableColumn fx:id="PedidoProducto" prefWidth="75.0" text="Producto" />
-          <TableColumn fx:id="CantidadProducto" prefWidth="75.0" text="Cantidad" />
-            <TableColumn fx:id="PrecioProducto" prefWidth="90.0" text="Precio Total" />
-        </columns>
-      </TableView>
-      <Button layoutX="27.0" layoutY="266.0" mnemonicParsing="false" onAction="#anadir" text="Agregar a la compra">
-         <effect>
-            <Lighting diffuseConstant="1.43">
-               <bumpInput>
-                  <Shadow />
-               </bumpInput>
-               <light>
-                  <Light.Distant>
-                     <color>
-                        <Color red="0.8421052694320679" green="0.015594542026519775" blue="0.015594542026519775" />
-                     </color>
-                  </Light.Distant>
-               </light>
-            </Lighting>
-         </effect></Button>
-      <Label layoutX="141.0" layoutY="299.0" text="Tus productos" textFill="WHITE">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="IDUsuario" fitHeight="81.0" fitWidth="77.0" layoutX="510.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@usuario.png" />
-         </image>
-         <effect>
-            <Lighting bumpInput="$null">
-               <light>
-                  <Light.Distant>
-                     <color>
-                        <Color red="0.6980392336845398" green="0.0235294122248888" blue="0.0235294122248888" />
-                     </color>
-                  </Light.Distant>
-               </light>
-            </Lighting>
-         </effect>
-      </ImageView>
+                  </light>
+               </Lighting>
+            </effect>
+         </TableView>
+         <Button fx:id="BotonRealizarPedido" layoutX="443.0" layoutY="376.0" mnemonicParsing="false" onAction="#realizarPedidio" text="Realizar pedido" />
+         <TableView fx:id="TableProducto" layoutX="69.0" layoutY="348.0" prefHeight="81.0" prefWidth="241.0">
+            <columns>
+               <TableColumn fx:id="PedidoProducto" prefWidth="75.0" text="Producto" />
+               <TableColumn fx:id="CantidadProducto" prefWidth="75.0" text="Cantidad" />
+               <TableColumn fx:id="PrecioProducto" prefWidth="90.0" text="Precio Total" />
+            </columns>
+         </TableView>
+         <Button layoutX="27.0" layoutY="266.0" mnemonicParsing="false" onAction="#anadir" text="Agregar a la compra">
+            <effect>
+               <Lighting diffuseConstant="1.43">
+                  <bumpInput>
+                     <Shadow />
+                  </bumpInput>
+                  <light>
+                     <Light.Distant>
+                        <color>
+                           <Color red="0.8421052694320679" green="0.015594542026519775" blue="0.015594542026519775" />
+                        </color>
+                     </Light.Distant>
+                  </light>
+               </Lighting>
+            </effect></Button>
+         <Label layoutX="141.0" layoutY="299.0" text="Tus productos" textFill="WHITE">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Label>
+         <ImageView fx:id="IDUsuario" fitHeight="81.0" fitWidth="77.0" layoutX="510.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@usuario.png" />
+            </image>
+            <effect>
+               <Lighting bumpInput="$null">
+                  <light>
+                     <Light.Distant>
+                        <color>
+                           <Color red="0.6980392336845398" green="0.0235294122248888" blue="0.0235294122248888" />
+                        </color>
+                     </Light.Distant>
+                  </light>
+               </Lighting>
+            </effect>
+         </ImageView>
          <TextField fx:id="CantidadPedidos" layoutX="237.0" layoutY="266.0" />
          <Label layoutX="162.0" layoutY="270.0" text="Cantidad:" textFill="WHITE" />
          <Button layoutX="415.0" layoutY="14.0" mnemonicParsing="false" onAction="#refrescarDatos" text="Refresh" />
@@ -88,7 +88,7 @@
          <Label layoutX="420.0" layoutY="98.0" text="Nombre:" textFill="WHITE" />
          <Label layoutX="419.0" layoutY="151.0" text="Apellidos" textFill="WHITE" />
          <Label layoutX="418.0" layoutY="208.0" text="Direccion" textFill="WHITE" />
-         <Button layoutX="534.0" layoutY="414.0" mnemonicParsing="false" onAction="#cambio" text="Cambio" />
-   </children>
-</AnchorPane>
+         <Button layoutX="534.0" layoutY="414.0" mnemonicParsing="false"  text="Cambio" />
+      </children>
+   </AnchorPane>
 </StackPane>
