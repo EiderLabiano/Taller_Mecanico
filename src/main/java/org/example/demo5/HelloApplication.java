@@ -48,6 +48,20 @@ public class HelloApplication   extends Application {
         stage.setScene(scene);
         stage.show();
     }
+    public void pedir() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(PedidoController.class.getResource("InsertarPedidos.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 800, 600);
+        stage.setTitle("Hello!");
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void listaPedidos() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(PedidoDao.class.getResource("Pedidos.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 800, 600);
+        stage.setTitle("Hello!");
+        stage.setScene(scene);
+        stage.show();
+    }
 
 
 }
