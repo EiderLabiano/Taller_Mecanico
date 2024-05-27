@@ -1,5 +1,6 @@
 package org.example.demo5;
 
+import javafx.beans.binding.ObjectExpression;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -36,6 +37,10 @@ public class HelloController {
         cerrarVentana(event);
         if (Objects.equals(conectarSql(), "Mecanico")) {
             cambioPagina.TABLA();
+        } else if (Objects.equals(conectarSql(), "Cliente")) {
+            cambioPagina.pedir();
+        } else if (Objects.equals(conectarSql(), "Recepcionista")) {
+            cambioPagina.listaPedidos();
         }
     }
     public String conectarSql() throws SQLException {
