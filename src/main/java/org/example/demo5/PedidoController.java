@@ -106,6 +106,7 @@ public class PedidoController implements Initializable {
     }
 
     public ObservableList<Componentes> refrescarDatos() {
+        ListPiezas.clear();
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/TallerMecanico", "root", "root")) {
             String selectSQL = "SELECT * FROM Componentes";
             try (PreparedStatement statement = connection.prepareStatement(selectSQL)) {
@@ -157,6 +158,7 @@ public class PedidoController implements Initializable {
         StringBuilder componentes = new StringBuilder();
         int precioTotal = 0;
         for (Pedidos listPedido : ListPedidos) {
+            quitar(listPedido.getCantidad(), listPedido.getNombreComponente());
             precioTotal = precioTotal + listPedido.getPrecio();
             componentes.append(" ").append(listPedido.getNombreComponente());
         }
@@ -164,7 +166,6 @@ public class PedidoController implements Initializable {
             String insertQuery = "INSERT INTO Averias (NombreUsuario, apellido, direccion, componentes, Precio) VALUES (?, ?, ?, ?, ?)";
 
             try {
-                /*quitar();*/
                 PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
                 preparedStatement.setString(1, nameTxt.getText());
                 preparedStatement.setString(2, apelidoTxt.getText());
@@ -176,6 +177,13 @@ public class PedidoController implements Initializable {
                 throw new RuntimeException(e);
             }
         }
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/TallerMecanico", "root", "root")) {
+            Statement statement = connection.createStatement();
+
+            // Ejecutar la consulta de eliminación
+            String deleteQuery = "DELETE FROM pe";
+            statement.executeUpdate(deleteQuery);
+        }
     }
 
     public static void cerrarVentana(ActionEvent e) {
@@ -184,21 +192,27 @@ public class PedidoController implements Initializable {
         stage.close();
     }
 
-    public void cambio() throws IOException {
-        a.ma();
-    }
-
-    public void quitar(int id) {
+    public void quitar(int cantidad, String nombre) {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/TallerMecanico", "root", "root")) {
-            String insertQuery = "UPDATE COMPONENTES SET STOCK = ? WHERE ID_Componente = ?";
-            String selectSQL = "SELECT Stock FROM Componentes where ID_Componente = ?";
-            PreparedStatement p1 = connection.prepareStatement(selectSQL);
-            p1.setInt(1,id);
-            System.out.println(p1);
-            Statement s = connection.createStatement();
-            PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
-            preparedStatement.setInt(2, id);
-
+            String selectSQL = "SELECT stock FROM Componentes WHERE nombre = ?";
+            PreparedStatement selectStatement = connection.prepareStatement(selectSQL);
+            selectStatement.setString(1, nombre);
+            ResultSet resultado = selectStatement.executeQuery();
+            if (resultado.next()) {
+                int stockActual = resultado.getInt("stock");
+                String updateSQL = "UPDATE COMPONENTES SET STOCK = ? WHERE nombre = ?";
+                int resta = stockActual - cantidad;
+                if (resta <0)
+                {
+                    System.out.println("No se puede hacer la compra");
+                }
+                else {
+                    PreparedStatement updateStatement = connection.prepareStatement(updateSQL);
+                    updateStatement.setInt(1, resta);
+                    updateStatement.setString(2, nombre);
+                    updateStatement.execute();
+                }
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
