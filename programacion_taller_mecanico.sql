@@ -1,4 +1,3 @@
-drop database if exists TallerMecanico;
 create database if not exists TallerMecanico;
 use TallerMecanico;
 
@@ -41,10 +40,19 @@ CREATE TABLE Pedidos (
 );
 
 CREATE TABLE Averias (
-                         IdPedido INT PRIMARY KEY,
+                         IdPedido INT PRIMARY KEY auto_increment,
                          NombreUsuario VARCHAR(50),
-                         Descripcion TEXT,
-                         Precio DECIMAL(10, 2)
+                         apellido varchar(50),
+                         direccion varchar(200),
+                         componente varchar(100),
+                         Precio int
+);
+drop table pe;
+create Table pe(
+	id INT primary key auto_increment,
+    NombreC Varchar(50),
+    Cantidad int,
+    Precio int
 );
 INSERT INTO Componentes (nombre, modelo, stock, precio) VALUES
                                                             ('Alternador', 'ALT1234', 15, 120),
