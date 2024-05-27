@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo5.Pedidos">
+   <children>
+      <ImageView fitHeight="546.0" fitWidth="787.0" layoutX="-110.0" layoutY="-18.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@carbono.png" />
+         </image>
+      </ImageView>
+      <TableView layoutX="65.0" layoutY="130.0" prefHeight="364.0" prefWidth="470.0">
+        <columns>
+          <TableColumn fx:id="IDAveria" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="IDNombre" prefWidth="75.0" text="Nombre" />
+            <TableColumn fx:id="IDApellidos" prefWidth="75.0" text="Apellidos" />
+            <TableColumn fx:id="IDDireccion" prefWidth="75.0" text="Dirección" />
+            <TableColumn fx:id="IDComponentes" prefWidth="95.0" text="Componentes" />
+            <TableColumn fx:id="IDPrecio" prefWidth="77.0" text="Precio" />
+        </columns>
+      </TableView>
+      <ImageView fitHeight="89.0" fitWidth="143.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@24YF-en-removebg-preview.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="81.0" fitWidth="77.0" layoutX="510.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@usuario.png" />
+         </image>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant>
+                     <color>
+                        <Color red="0.6980392336845398" green="0.0235294122248888" blue="0.0235294122248888" />
+                     </color>
+                  </Light.Distant>
+               </light>
+            </Lighting>
+         </effect>
+      </ImageView>
+      <Label layoutX="393.0" layoutY="10.0" text="Pedidos" textFill="#ff1414">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Separator layoutX="-9.0" layoutY="114.0" prefHeight="2.0" prefWidth="627.0" />
+   </children>
+</AnchorPane>
