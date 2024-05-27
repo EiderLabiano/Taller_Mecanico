@@ -1,13 +1,26 @@
 package org.example.demo5;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Conexion {
-    Connection connection;
-    Statement statement;
+    private Connection connection;
+    private Statement statement;
+
+    public Connection getConnection() {
+        return connection;
+    }
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
+
+    public Statement getStatement() {
+        return statement;
+    }
+
+    public void setStatement(Statement statement) {
+        this.statement = statement;
+    }
 
     public Conexion() throws SQLException, SQLException {
         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/", "root", "root");
