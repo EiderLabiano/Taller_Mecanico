@@ -1,17 +1,18 @@
 package org.example.demo5;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
-import java.util.Objects;
 import java.util.ResourceBundle;
+
+import static org.example.demo5.HelloController.cerrarVentana;
 
 public class Tabla implements Initializable {
     public TableView<Componentes> tableView;
@@ -21,23 +22,20 @@ public class Tabla implements Initializable {
     public TableColumn<Componentes, String> ModeloColumn;
     public TableColumn<Componentes, Integer> StockColumn;
     public TableColumn<Componentes, Integer> PrecioColumn;
+    public Button idComponente;
+    public ListView<Componentes> compos;
+    public HelloApplication cambioPagina;
     ObservableList<Componentes> ListPiezas = FXCollections.observableArrayList();
 
-    public Connection conectarSql() {
-        String direccion = "jdbc:mysql://localhost:3306/TallerMecanico";
-        String usuario = "root";
-        String contrasenya = "root";
-        Connection conexion = null;
+    public Tabla()
+    {
+        cambioPagina = new HelloApplication();
+        compos = new ListView<>();
+    }
 
-        try {
-            conexion = DriverManager.getConnection(direccion, usuario, contrasenya);
-            if (conexion != null) {
-                return conexion;
-            }
-        } catch (SQLException e) {
-            System.out.println("Error al acceder");
-        }
-        return null;
+    public void insertarComponente(ActionEvent event) throws IOException {
+        cerrarVentana(event);
+        cambioPagina.insertar();
     }
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -48,19 +46,30 @@ public class Tabla implements Initializable {
         StockColumn.setCellValueFactory(new PropertyValueFactory<Componentes, Integer>("Stock"));
         PrecioColumn.setCellValueFactory(new PropertyValueFactory<Componentes, Integer>("precio"));
         tableView.setItems(ListPiezas);
+        tableView.setRowFactory(tv -> new TableRow<Componentes>() {
+            @Override
+            protected void updateItem(Componentes item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setStyle("");
+                } else {
+                    setStyle(getRowStyle(item.getStock()));
+                }
+            }
+        });
     }
-
     private String getRowStyle(int stock) {
         if (stock == 0) {
-            return "-fx-control-inner-background: red;";
+            return "-fx-background-color:#FF0000";
         } else if (stock <= 5) {
-            return "-fx-control-inner-background: yellow;";
+            return "-fx-background-color:#FFFF00";
         } else {
-            return ""; // Sin estilo para stocks normales
+            return "";
         }
     }
 
     public ObservableList<Componentes> refrescarDatos() {
+        ListPiezas.clear();
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/TallerMecanico", "root", "root")) {
             String selectSQL = "SELECT * FROM Componentes";
             try (PreparedStatement statement = connection.prepareStatement(selectSQL)) {
@@ -75,13 +84,13 @@ public class Tabla implements Initializable {
 
                     Componentes nuevoComponente = new Componentes(ID, Nombre, Modelo, stock, precio);
                     ListPiezas.add(nuevoComponente);
+
                 }
                 return ListPiezas;
             }
         } catch (SQLException e) {
-
             e.printStackTrace();
+            return null;
         }
-        return null;
     }
 }
