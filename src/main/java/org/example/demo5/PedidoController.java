@@ -7,11 +7,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -37,15 +36,24 @@ public class PedidoController implements Initializable {
     public TableColumn<Pedidos, Integer> PrecioProducto;
     public TableView<Pedidos> TableProducto;
     public TextField CantidadPedidos;
+    public TextField nameTxt;
+    public TextField apelidoTxt;
+    public TextField direccionTxt;
+    private HelloApplication a;
+
+    public PedidoController() {
+        a = new HelloApplication();
+    }
+
     ObservableList<Componentes> ListPiezas = FXCollections.observableArrayList();
     ObservableList<Pedidos> ListPedidos = FXCollections.observableArrayList();
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tableView.setItems(ListPiezas);
         TableProducto.setItems(ListPedidos);
-        IDColumn.setCellValueFactory(new PropertyValueFactory<Componentes,Integer>("ID_Componente"));
-        NombreClumn.setCellValueFactory(new PropertyValueFactory<Componentes,String>("Nombre"));
-        ModeloColumn.setCellValueFactory(new PropertyValueFactory<Componentes,String>("modelo"));
+        IDColumn.setCellValueFactory(new PropertyValueFactory<Componentes, Integer>("ID_Componente"));
+        NombreClumn.setCellValueFactory(new PropertyValueFactory<Componentes, String>("Nombre"));
+        ModeloColumn.setCellValueFactory(new PropertyValueFactory<Componentes, String>("modelo"));
         StockColumn.setCellValueFactory(new PropertyValueFactory<Componentes, Integer>("Stock"));
         PrecioColumn.setCellValueFactory(new PropertyValueFactory<Componentes, Integer>("precio"));
         PedidoProducto.setCellValueFactory(new PropertyValueFactory<Pedidos, String>("nombreComponente"));
@@ -71,11 +79,13 @@ public class PedidoController implements Initializable {
             return ""; // Sin estilo para stocks normales
         }
     }
+
     public void anadir() throws SQLException {
         String componente = tableView.getSelectionModel().getSelectedItem().getNombre();
         int precio = tableView.getSelectionModel().getSelectedItem().getPrecio();
         anadirALaBolsa(componente, precio);
     }
+
     public void anadirALaBolsa(String nombre, int precio) throws SQLException {
         int cantidad = parseInt(CantidadPedidos.getText());
         System.out.println(cantidad);
@@ -94,6 +104,7 @@ public class PedidoController implements Initializable {
             }
         }
     }
+
     public ObservableList<Componentes> refrescarDatos() {
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/TallerMecanico", "root", "root")) {
             String selectSQL = "SELECT * FROM Componentes";
@@ -118,7 +129,8 @@ public class PedidoController implements Initializable {
         }
         return null;
     }
-    public ObservableList<Pedidos> refrescarPedidos(){
+
+    public ObservableList<Pedidos> refrescarPedidos() {
         ListPedidos.clear();
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/TallerMecanico", "root", "root")) {
             String selectSQL = "SELECT * FROM Pe";
@@ -139,5 +151,56 @@ public class PedidoController implements Initializable {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void realizarPedidio() throws SQLException {
+        StringBuilder componentes = new StringBuilder();
+        int precioTotal = 0;
+        for (Pedidos listPedido : ListPedidos) {
+            precioTotal = precioTotal + listPedido.getPrecio();
+            componentes.append(" ").append(listPedido.getNombreComponente());
+        }
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/TallerMecanico", "root", "root")) {
+            String insertQuery = "INSERT INTO Averias (NombreUsuario, apellido, direccion, componentes, Precio) VALUES (?, ?, ?, ?, ?)";
+
+            try {
+                /*quitar();*/
+                PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
+                preparedStatement.setString(1, nameTxt.getText());
+                preparedStatement.setString(2, apelidoTxt.getText());
+                preparedStatement.setString(3, direccionTxt.getText());
+                preparedStatement.setString(4, componentes.toString());
+                preparedStatement.setInt(5, precioTotal);
+                preparedStatement.execute();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public static void cerrarVentana(ActionEvent e) {
+        Node source = (Node) e.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+        stage.close();
+    }
+
+    public void cambio() throws IOException {
+        a.ma();
+    }
+
+    public void quitar(int id) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/TallerMecanico", "root", "root")) {
+            String insertQuery = "UPDATE COMPONENTES SET STOCK = ? WHERE ID_Componente = ?";
+            String selectSQL = "SELECT Stock FROM Componentes where ID_Componente = ?";
+            PreparedStatement p1 = connection.prepareStatement(selectSQL);
+            p1.setInt(1,id);
+            System.out.println(p1);
+            Statement s = connection.createStatement();
+            PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
+            preparedStatement.setInt(2, id);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
