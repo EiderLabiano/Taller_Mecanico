@@ -48,9 +48,8 @@ CREATE TABLE Averias (
                          componentes varchar(10000),
                          Precio int
 );
-drop table pe;
 create Table pe(
-	id INT primary key auto_increment,
+id INT primary key auto_increment,
     NombreC Varchar(50),
     Cantidad int,
     Precio int
@@ -168,27 +167,3 @@ INSERT INTO Pedidos (nombreComponente, numero, numeroComponentesPedidos, estadoP
                                                                                             ('Rodamiento de Rueda', 18, 10, 'Entregando'),
                                                                                             ('Amortiguador', 19, 8, 'Preparacion'),
                                                                                             ('Silenciador', 20, 5, 'Entregado');
--- Inserts para Averias
-INSERT INTO Averias (IdPedido, NombreUsuario, Descripcion, Precio) VALUES
-                                                                       (1, 'Alicia', 'Reemplazo de alternador', 150.00),
-                                                                       (2, 'Roberto', 'Reemplazo de batería', 100.00),
-                                                                       (3, 'Carlos', 'Reemplazo de pastillas de freno', 60.00),
-                                                                       (4, 'David', 'Reemplazo de bujía', 25.00),
-                                                                       (5, 'Eva', 'Cambio de filtro de aceite', 20.00),
-                                                                       (6, 'Francisco', 'Cambio de filtro de aire', 25.00),
-                                                                       (7, 'Graciela', 'Reparación de bomba de combustible', 250.00),
-                                                                       (8, 'Hilda', 'Reemplazo de radiador', 180.00),
-                                                                       (9, 'Iván', 'Cambio de correa de distribución', 100.00),
-                                                                       (10, 'Judit', 'Reemplazo de faro', 90.00),
-                                                                       (11, 'Karl', 'Reemplazo de limpiaparabrisas', 20.00),
-                                                                       (12, 'Laura', 'Instalación de kit de embrague', 300.00),
-                                                                       (13, 'Malena', 'Reparación de motor de arranque', 200.00),
-                                                                       (14, 'Ned', 'Reemplazo de correa del alternador', 35.00),
-                                                                       (15, 'Oscar', 'Reemplazo de disco de freno', 120.00),
-                                                                       (16, 'Peggy', 'Instalación de turbo', 350.00),
-                                                                       (17, 'Quinn', 'Reparación de tubo de escape', 100.00),
-                                                                       (18, 'Ruperto', 'Reemplazo de rodamiento de rueda', 80.00),
-                                                                       (19, 'Sibila', 'Reemplazo de amortiguador', 150.00),
-                                                                       (20, 'Trent', 'Reparación de silenciador', 160.00);
-                                                                       
-                                                                       
