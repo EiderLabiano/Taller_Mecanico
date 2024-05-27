@@ -34,7 +34,7 @@
             </Lighting>
          </effect>
       </TableView>
-      <Button fx:id="BotonRealizarPedido" layoutX="443.0" layoutY="376.0" mnemonicParsing="false" text="Realizar pedido" />
+      <Button fx:id="BotonRealizarPedido" layoutX="443.0" layoutY="376.0" mnemonicParsing="false" onAction="#realizarPedidio" text="Realizar pedido" />
       <TableView fx:id="TableProducto" layoutX="69.0" layoutY="348.0" prefHeight="81.0" prefWidth="241.0">
         <columns>
           <TableColumn fx:id="PedidoProducto" prefWidth="75.0" text="Producto" />
@@ -80,8 +80,15 @@
       </ImageView>
          <TextField fx:id="CantidadPedidos" layoutX="237.0" layoutY="266.0" />
          <Label layoutX="162.0" layoutY="270.0" text="Cantidad:" textFill="WHITE" />
-         <Button layoutX="405.0" layoutY="230.0" mnemonicParsing="false" onAction="#refrescarDatos" text="Refresh" />
+         <Button layoutX="415.0" layoutY="14.0" mnemonicParsing="false" onAction="#refrescarDatos" text="Refresh" />
          <Button layoutX="325.0" layoutY="401.0" mnemonicParsing="false" onAction="#refrescarPedidos" text="Refresh" />
+         <TextField fx:id="nameTxt" layoutX="418.0" layoutY="115.0" />
+         <TextField fx:id="apelidoTxt" layoutX="418.0" layoutY="168.0" />
+         <TextField fx:id="direccionTxt" layoutX="418.0" layoutY="230.0" />
+         <Label layoutX="420.0" layoutY="98.0" text="Nombre:" textFill="WHITE" />
+         <Label layoutX="419.0" layoutY="151.0" text="Apellidos" textFill="WHITE" />
+         <Label layoutX="418.0" layoutY="208.0" text="Direccion" textFill="WHITE" />
+         <Button layoutX="534.0" layoutY="414.0" mnemonicParsing="false" onAction="#cambio" text="Cambio" />
    </children>
 </AnchorPane>
 </StackPane>
