@@ -1,3 +1,4 @@
+drop database if exists TallerMecanico;
 create database if not exists TallerMecanico;
 use TallerMecanico;
 
@@ -44,7 +45,7 @@ CREATE TABLE Averias (
                          NombreUsuario VARCHAR(50),
                          apellido varchar(50),
                          direccion varchar(200),
-                         componente varchar(100),
+                         componentes varchar(10000),
                          Precio int
 );
 drop table pe;
@@ -189,3 +190,5 @@ INSERT INTO Averias (IdPedido, NombreUsuario, Descripcion, Precio) VALUES
                                                                        (18, 'Ruperto', 'Reemplazo de rodamiento de rueda', 80.00),
                                                                        (19, 'Sibila', 'Reemplazo de amortiguador', 150.00),
                                                                        (20, 'Trent', 'Reparación de silenciador', 160.00);
+                                                                       
+                                                                       
