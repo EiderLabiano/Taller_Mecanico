@@ -1,31 +1,47 @@
 package org.example.demo5;
 
 public class Pedidos {
-    public int ID;
-    public String nombreCOMPONENTE;
-    public int numero;
+    private int id;
+    private String nombreComponente;
+    private int cantidad;
+    private int precio;
 
-    public int getID() {
-        return ID;
+    public Pedidos(String nombre, int cuanto, int precio) {
+        this.precio = precio;
+        this.nombreComponente = nombre;
+        this.cantidad = cuanto;
+
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public int getPrecio() {
+        return precio;
     }
 
-    public String getNombreCOMPONENTE() {
-        return nombreCOMPONENTE;
+    public void setPrecio(int precio) {
+        this.precio = precio;
     }
 
-    public void setNombreCOMPONENTE(String nombreCOMPONENTE) {
-        this.nombreCOMPONENTE = nombreCOMPONENTE;
+    public int getId() {
+        return id;
     }
 
-    public int getNumero() {
-        return numero;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
+    public String getNombreComponente() {
+        return nombreComponente;
+    }
+
+    public void setNombreComponente(String nombreComponente) {
+        this.nombreComponente = nombreComponente;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 }
