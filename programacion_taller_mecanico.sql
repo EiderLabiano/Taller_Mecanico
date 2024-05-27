@@ -1,206 +1,183 @@
 drop database if exists TallerMecanico;
-create database  TallerMecanico;
+create database if not exists TallerMecanico;
 use TallerMecanico;
 
-create table usuario(
-nombre varchar(50),
-contrasenya varchar(50)
-);
-
-  CREATE TABLE Componentes (
-    ID_Componente INT PRIMARY KEY,
-    nombre VARCHAR(255),
-modelo VARCHAR(255),
-stock int,
-    numero int
+CREATE TABLE Componentes (
+                             ID_Componente INT AUTO_INCREMENT PRIMARY KEY,
+                             nombre VARCHAR(255),
+                             modelo VARCHAR(255),
+                             stock int,
+                             precio int
 );
 
 
 
-  CREATE TABLE Usuarios (
-    ID_Usuarios INT PRIMARY KEY,
-    Contraseña VARCHAR(50),
-    Nombre VARCHAR(20),
-    rol boolean
-    );
-    -- drop table Usuarios;
-   
-  CREATE TABLE Almacen (
-    ID_Almacen INT PRIMARY KEY,
-    comoponente VARCHAR(255),
-    stock int
+CREATE TABLE Usuarios (
+                          ID_Usuarios INT PRIMARY KEY,
+                          Contraseña VARCHAR(50),
+                          Nombre VARCHAR(20),
+                          rol enum('Mecanico', 'Cliente', 'Recepcionista')
 );
--- drop table Almacen;
 
- create table pertenecen (
-ID_Componente int,
- ID_Almacen int,
- FOREIGN KEY (`ID_Componente`) REFERENCES `Componentes` (`ID_Componente`),
- FOREIGN KEY (`ID_Almacen`) REFERENCES `Almacen` (`ID_Almacen`),
-  PRIMARY KEY (`ID_Componente`,`ID_Almacen`)
- );
- -- drop table pertenecen;
- 
- CREATE TABLE Pedidos (
-    IdPedido INT AUTO_INCREMENT PRIMARY KEY,
-    nombreComponente VARCHAR(50),
-    numero int
+CREATE TABLE Almacen (
+                         ID_Almacen INT PRIMARY KEY,
+                         comoponente VARCHAR(255),
+                         stock int
+);
+
+create table pertenecen (
+                            ID_Componente int,
+                            ID_Almacen int,
+                            FOREIGN KEY (`ID_Componente`) REFERENCES `Componentes` (`ID_Componente`),
+                            FOREIGN KEY (`ID_Almacen`) REFERENCES `Almacen` (`ID_Almacen`),
+                            PRIMARY KEY (`ID_Componente`,`ID_Almacen`)
+);
+
+CREATE TABLE Pedidos (
+                         IdPedido INT AUTO_INCREMENT PRIMARY KEY,
+                         nombreComponente VARCHAR(50),numero int,
+                         numeroComponentesPedidos int,
+                         estadoPedidos enum('Entregado', 'Preparacion', 'Entregando')
 );
 
 CREATE TABLE Averias (
-  IdPedido INT PRIMARY KEY,
-  NombreUsuario VARCHAR(50),
-  Descripcion TEXT,
-  Precio DECIMAL(10, 2)
+                         IdPedido INT PRIMARY KEY,
+                         NombreUsuario VARCHAR(50),
+                         Descripcion TEXT,
+                         Precio DECIMAL(10, 2)
 );
-CREATE TABLE componentes (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(255),
-    precio DECIMAL(10, 2),
-    stock INT
-);
-CREATE TABLE pedidos (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    averia_id INT,
-    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (averia_id) REFERENCES averias(id)
-);
-CREATE TABLE detalle_pedido (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    pedido_id INT,
-    componente_id INT,
-    cantidad INT,
-    FOREIGN KEY (pedido_id) REFERENCES pedidos(id),
-    FOREIGN KEY (componente_id) REFERENCES componentes(id)
-);
+INSERT INTO Componentes (nombre, modelo, stock, precio) VALUES
+                                                            ('Alternador', 'ALT1234', 15, 120),
+                                                            ('Batería', 'BAT5678', 25, 80),
+                                                            ('Pastillas de Freno', 'PFR91011', 50, 40),
+                                                            ('Bujía', 'BUJ11213', 75, 15),
+                                                            ('Filtro de Aceite', 'FIA1415', 100, 10),
+                                                            ('Filtro de Aire', 'FIA1617', 80, 20),
+                                                            ('Bomba de Combustible', 'BDC1819', 10, 200),
+                                                            ('Radiador', 'RAD2021', 5, 150),
+                                                            ('Correa de Distribución', 'CDD2223', 40, 60),
+                                                            ('Faro', 'FAR2425', 30, 70),
+                                                            ('Limpiaparabrisas', 'LMP2627', 90, 12),
+                                                            ('Kit de Embrague', 'KDE2829', 20, 250),
+                                                            ('Motor de Arranque', 'MDA3031', 8, 180),
+                                                            ('Correa del Alternador', 'CDA3233', 35, 25),
+                                                            ('Disco de Freno', 'DDF3435', 45, 100),
+                                                            ('Turbo', 'TUR3637', 7, 300),
+                                                            ('Tubo de Escape', 'TDE3839', 12, 90),
+                                                            ('Rodamiento de Rueda', 'RRR4041', 25, 70),
+                                                            ('Amortiguador', 'AMT4243', 20, 110),
+                                                            ('Silenciador', 'SIL4445', 15, 130);
 
-INSERT INTO Componentes (ID_Componente, nombre, modelo, stock, numero)
-VALUES (1, 'Batería', 'ACDelco 48AGM', 10, 150);
+-- Inserts para Usuarios
+INSERT INTO Usuarios (ID_Usuarios, Contraseña, Nombre, rol) VALUES
+                                                                (1, 'pass123', 'Alicia', 'Mecanico'),
+                                                                (2, 'pass124', 'Roberto', 'Cliente'),
+                                                                (3, 'pass125', 'Carlos', 'Recepcionista'),
+                                                                (4, 'pass126', 'David', 'Mecanico'),
+                                                                (5, 'pass127', 'Eva', 'Cliente'),
+                                                                (6, 'pass128', 'Francisco', 'Recepcionista'),
+                                                                (7, 'pass129', 'Graciela', 'Mecanico'),
+                                                                (8, 'pass130', 'Hilda', 'Cliente'),
+                                                                (9, 'pass131', 'Iván', 'Recepcionista'),
+                                                                (10, 'pass132', 'Judit', 'Mecanico'),
+                                                                (11, 'pass133', 'Karl', 'Cliente'),
+                                                                (12, 'pass134', 'Laura', 'Recepcionista'),
+                                                                (13, 'pass135', 'Malena', 'Mecanico'),
+                                                                (14, 'pass136', 'Ned', 'Cliente'),
+                                                                (15, 'pass137', 'Oscar', 'Recepcionista'),
+                                                                (16, 'pass138', 'Peggy', 'Mecanico'),
+                                                                (17, 'pass139', 'Quinn', 'Cliente'),
+                                                                (18, 'pass140', 'Ruperto', 'Recepcionista'),
+                                                                (19, 'pass141', 'Sibila', 'Mecanico'),
+                                                                (20, 'pass142', 'Trent', 'Cliente');
 
-INSERT INTO Componentes (ID_Componente, nombre, modelo, stock, numero)
-VALUES (2, 'Filtro de aceite', 'Bosch 3330', 20, 10);
+-- Inserts para Almacen
+INSERT INTO Almacen (ID_Almacen, comoponente, stock) VALUES
+                                                         (1, 'Alternador', 15),
+                                                         (2, 'Batería', 25),
+                                                         (3, 'Pastillas de Freno', 50),
+                                                         (4, 'Bujía', 75),
+                                                         (5, 'Filtro de Aceite', 100),
+                                                         (6, 'Filtro de Aire', 80),
+                                                         (7, 'Bomba de Combustible', 10),
+                                                         (8, 'Radiador', 5),
+                                                         (9, 'Correa de Distribución', 40),
+                                                         (10, 'Faro', 30),
+                                                         (11, 'Limpiaparabrisas', 90),
+                                                         (12, 'Kit de Embrague', 20),
+                                                         (13, 'Motor de Arranque', 8),
+                                                         (14, 'Correa del Alternador', 35),
+                                                         (15, 'Disco de Freno', 45),
+                                                         (16, 'Turbo', 7),
+                                                         (17, 'Tubo de Escape', 12),
+                                                         (18, 'Rodamiento de Rueda', 25),
+                                                         (19, 'Amortiguador', 20),
+                                                         (20, 'Silenciador', 15);
 
-INSERT INTO Componentes (ID_Componente, nombre, modelo, stock, numero)
-VALUES (3, 'Bujías', 'NGK Iridium IX', 5, 25);
+-- Inserts para pertenecen
+INSERT INTO pertenecen (ID_Componente, ID_Almacen) VALUES
+                                                       (1, 1),
+                                                       (2, 2),
+                                                       (3, 3),
+                                                       (4, 4),
+                                                       (5, 5),
+                                                       (6, 6),
+                                                       (7, 7),
+                                                       (8, 8),
+                                                       (9, 9),
+                                                       (10, 10),
+                                                       (11, 11),
+                                                       (12, 12),
+                                                       (13, 13),
+                                                       (14, 14),
+                                                       (15, 15),
+                                                       (16, 16),
+                                                       (17, 17),
+                                                       (18, 18),
+                                                       (19, 19),
+                                                       (20, 20);
 
-INSERT INTO Componentes (ID_Componente, nombre, modelo, stock, numero)
-VALUES (4, 'Frenos delanteros', 'Brembo GT', 3, 300);
-
-INSERT INTO Componentes (ID_Componente, nombre, modelo, stock, numero)
-VALUES (5, 'Amortiguadores', 'KYB Excel-G', 8, 75);
-
-INSERT INTO Componentes (ID_Componente, nombre, modelo, stock, numero)
-VALUES (6, 'Correa de distribución', 'Contitech 4PK1395', 2, 120);
-
-INSERT INTO Componentes (ID_Componente, nombre, modelo, stock, numero)
-VALUES (7, 'Limpiaparabrisas', 'Bosch Aerotwin', 15, 20);
-
-INSERT INTO Componentes (ID_Componente, nombre, modelo, stock, numero)
-VALUES (8, 'Aceite de motor', 'Mobil 1 5W-30', 25, 40);
-
-INSERT INTO Componentes (ID_Componente, nombre, modelo, stock, numero)
-VALUES (9, 'Filtro de aire', 'K&N 33-2260', 12, 35);
-
-INSERT INTO Componentes (ID_Componente, nombre, modelo, stock, numero)
-VALUES (11, 'Filtro de combustible', 'Bosch 3322', 15, 20);
-
-INSERT INTO Componentes (ID_Componente, nombre, modelo, stock, numero)
-VALUES (12, 'Correa serpentina', 'Contitech 4PK1725', 7, 80);
-
-INSERT INTO Componentes (ID_Componente, nombre, modelo, stock, numero)
-VALUES (13, 'Sensor de oxígeno', 'Bosch 13970', 8, 70);
-
-INSERT INTO Componentes (ID_Componente, nombre, modelo, stock, numero)
-VALUES (14, 'Bomba de agua', 'Gates 42291', 4, 120);
-
-INSERT INTO Componentes (ID_Componente, nombre, modelo, stock, numero)
-VALUES (15, 'Filtro de aceite', 'Mann-Filter HU 816 X', 20, 15);
-
-INSERT INTO Componentes (ID_Componente, nombre, modelo, stock, numero)
-VALUES (16, 'Filtro de aire', 'K&N 33-2261', 10, 40);
-
-INSERT INTO Componentes (ID_Componente, nombre, modelo, stock, numero)
-VALUES (17, 'Bujías', 'Denso SK20R11', 12, 30);
-
-INSERT INTO Componentes (ID_Componente, nombre, modelo, stock, numero)
-VALUES (18, 'Frenos traseros', 'Brembo GT-R', 2, 350);
-
-INSERT INTO Componentes (ID_Componente, nombre, modelo, stock, numero)
-VALUES (19, 'Amortiguadores traseros', 'KYB Excel-G', 6, 80);
-
-INSERT INTO Componentes (ID_Componente, nombre, modelo, stock, numero)
-VALUES (20, 'Batería', 'Optima RedTop', 5, 200);
-
-INSERT INTO Componentes (ID_Componente, nombre, modelo, stock, numero)
-VALUES (10, 'Embrague', 'LUK 62009', 1, 500);
-
-INSERT INTO Pedidos VALUES (69,'pedales',60);
-INSERT INTO pedidos VALUES (70,'pedales','60');
-INSERT INTO pedidos VALUES (71,'pedales','60');
-INSERT INTO pedidos VALUES (72,'pedales','60');
-INSERT INTO pedidos VALUES (73,'pedales','60');
-INSERT INTO pedidos VALUES (74,'pedales','60');
-INSERT INTO pedidos VALUES (75,'pedales','60');
-INSERT INTO pedidos VALUES (76,'pedales','60');
-INSERT INTO pedidos VALUES (77,'pedales','60');
-INSERT INTO pedidos VALUES (78,'pedales','60');
-INSERT INTO pedidos VALUES (79,'pedales','60');
-INSERT INTO pedidos VALUES (80,'pedales','60');
-
-INSERT INTO `Usuarios` VALUES (1,'Bujías','Paco',TRUE);
-INSERT INTO `Usuarios` VALUES (2,'volante','Ester',TRUE);
-INSERT INTO `Usuarios` VALUES (3,'pedales','Alberto',TRUE);
-INSERT INTO `Usuarios` VALUES (4,'batería','Luis',TRUE);
-INSERT INTO `Usuarios` VALUES (5,'embrague','Miguel',TRUE);
-INSERT INTO `Usuarios` VALUES (6,'bomba de agua','Samanta',TRUE);
-
-INSERT INTO `Almacen` VALUES (1,'volante',0);
-INSERT INTO `Almacen` VALUES (2,'volante',0);
-INSERT INTO `Almacen` VALUES (3,'volante',0);
-INSERT INTO `Almacen` VALUES (4,'volante',0);
-INSERT INTO `Almacen` VALUES (5,'volante',0);
-INSERT INTO `Almacen` VALUES (6,'volante',0);
-INSERT INTO `Almacen` VALUES (7,'volante',0);
-
-
-INSERT INTO Averias (IdPedido, NombreUsuario, Descripcion, Precio)
-VALUES (1, 'Juan Pérez', 'Cambio de aceite y filtro', 50.00);
-
-INSERT INTO Averias (IdPedido, NombreUsuario, Descripcion, Precio)
-VALUES (2, 'Ana Gómez', 'Reparación de frenos delanteros', 250.00);
-
-INSERT INTO Averias (IdPedido, NombreUsuario, Descripcion, Precio)
-VALUES (3, 'Carlos Rodríguez', 'Cambio de batería', 120.00);
-
-INSERT INTO Averias (IdPedido, NombreUsuario, Descripcion, Precio)
-VALUES (4, 'María Sánchez', 'Reparación de escape', 300.00);
-
-INSERT INTO Averias (IdPedido, NombreUsuario, Descripcion, Precio)
-VALUES (5, 'Pedro González', 'Cambio de neumáticos', 400.00);
-
-INSERT INTO Averias (IdPedido, NombreUsuario, Descripcion, Precio)
-VALUES (6, 'Laura Martínez', 'Reparación de embrague', 600.00);
-
-INSERT INTO Averias (IdPedido, NombreUsuario, Descripcion, Precio)
-VALUES (7, 'José Fernández', 'Cambio de correa de distribución', 200.00);
-
-INSERT INTO Averias (IdPedido, NombreUsuario, Descripcion, Precio)
-VALUES (8, 'Sara López', 'Reparación de parabrisas', 250.00);
-
-INSERT INTO Averias (IdPedido, NombreUsuario, Descripcion, Precio)
-VALUES (9, 'Luis Rodríguez', 'Cambio de filtro de aire', 30.00);
-
-INSERT INTO Averias (IdPedido, NombreUsuario, Descripcion, Precio)
-VALUES (10, 'Ana Martínez', 'Revisión general del vehículo', 100.00);
-
-INSERT INTO pedidos (averia_id) VALUES (1);
-INSERT INTO detalle_pedido (pedido_id, componente_id, cantidad) VALUES (1, 1, 5);
-
-
-
-
-
-
-select *
-from Pedidos
--- where ID_Componente = 1;
+-- Inserts para Pedidos
+INSERT INTO Pedidos (nombreComponente, numero, numeroComponentesPedidos, estadoPedidos) VALUES
+                                                                                            ('Alternador', 1, 5, 'Preparacion'),
+                                                                                            ('Batería', 2, 10, 'Entregado'),
+                                                                                            ('Pastillas de Freno', 3, 20, 'Entregando'),
+                                                                                            ('Bujía', 4, 30, 'Entregado'),
+                                                                                            ('Filtro de Aceite', 5, 50, 'Preparacion'),
+                                                                                            ('Filtro de Aire', 6, 40, 'Entregando'),
+                                                                                            ('Bomba de Combustible', 7, 3, 'Preparacion'),
+                                                                                            ('Radiador', 8, 2, 'Entregado'),
+                                                                                            ('Correa de Distribución', 9, 10, 'Entregando'),
+                                                                                            ('Faro', 10, 8, 'Preparacion'),
+                                                                                            ('Limpiaparabrisas', 11, 25, 'Entregado'),
+                                                                                            ('Kit de Embrague', 12, 7, 'Entregando'),
+                                                                                            ('Motor de Arranque', 13, 2, 'Preparacion'),
+                                                                                            ('Correa del Alternador', 14, 12, 'Entregado'),
+                                                                                            ('Disco de Freno', 15, 15, 'Entregando'),
+                                                                                            ('Turbo', 16, 1, 'Preparacion'),
+                                                                                            ('Tubo de Escape', 17, 5, 'Entregado'),
+                                                                                            ('Rodamiento de Rueda', 18, 10, 'Entregando'),
+                                                                                            ('Amortiguador', 19, 8, 'Preparacion'),
+                                                                                            ('Silenciador', 20, 5, 'Entregado');
+-- Inserts para Averias
+INSERT INTO Averias (IdPedido, NombreUsuario, Descripcion, Precio) VALUES
+                                                                       (1, 'Alicia', 'Reemplazo de alternador', 150.00),
+                                                                       (2, 'Roberto', 'Reemplazo de batería', 100.00),
+                                                                       (3, 'Carlos', 'Reemplazo de pastillas de freno', 60.00),
+                                                                       (4, 'David', 'Reemplazo de bujía', 25.00),
+                                                                       (5, 'Eva', 'Cambio de filtro de aceite', 20.00),
+                                                                       (6, 'Francisco', 'Cambio de filtro de aire', 25.00),
+                                                                       (7, 'Graciela', 'Reparación de bomba de combustible', 250.00),
+                                                                       (8, 'Hilda', 'Reemplazo de radiador', 180.00),
+                                                                       (9, 'Iván', 'Cambio de correa de distribución', 100.00),
+                                                                       (10, 'Judit', 'Reemplazo de faro', 90.00),
+                                                                       (11, 'Karl', 'Reemplazo de limpiaparabrisas', 20.00),
+                                                                       (12, 'Laura', 'Instalación de kit de embrague', 300.00),
+                                                                       (13, 'Malena', 'Reparación de motor de arranque', 200.00),
+                                                                       (14, 'Ned', 'Reemplazo de correa del alternador', 35.00),
+                                                                       (15, 'Oscar', 'Reemplazo de disco de freno', 120.00),
+                                                                       (16, 'Peggy', 'Instalación de turbo', 350.00),
+                                                                       (17, 'Quinn', 'Reparación de tubo de escape', 100.00),
+                                                                       (18, 'Ruperto', 'Reemplazo de rodamiento de rueda', 80.00),
+                                                                       (19, 'Sibila', 'Reemplazo de amortiguador', 150.00),
+                                                                       (20, 'Trent', 'Reparación de silenciador', 160.00);
